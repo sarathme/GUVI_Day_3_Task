@@ -8,7 +8,44 @@
   </head>
   <body>
     <script type="text/javascript">
-      console.log("hello World");
+      console.log("-----------------Question 1---------------------");
+
+      var obj1 = { name: "Person 1", age: 5 };
+      var obj2 = { age: 5, name: "Person 1" };
+      var res = "Equal";
+
+      for (var i = 0; i < Object.keys(obj1).length; i++) {
+        if (obj1[Object.keys(obj1)[i]] !== obj2[Object.keys(obj1)[i]]) {
+          res = "Not Equal";
+        }
+      }
+      console.log(res);
+
+      var xhr = new XMLHttpRequest();
+
+      xhr.open("GET", "https://restcountries.com/v3.1/all", true);
+
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) {
+          console.log("-----------------Question 2---------------------");
+          var data = JSON.parse(xhr.responseText);
+          for (var i = 0; i < data.length; i++) {
+            console.log(
+              `Country Name: ${data[i].name.common}, Flag: ${data[i].flag}`
+            );
+          }
+          console.log("-----------------Question 3---------------------");
+          for (var i = 0; i < data.length; i++) {
+            console.log(`Country Name: ${data[i].name.common}`);
+            console.log(`Region: ${data[i].region}`);
+            console.log(`Sub-Region: ${data[i].subregion}`);
+            console.log(`Population: ${data[i].population}`);
+            console.log("-------------------------------------------------");
+          }
+        }
+      };
+
+      xhr.send();
     </script>
   </body>
 </html>
